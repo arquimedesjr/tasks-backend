@@ -24,7 +24,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <java.version>1.8</java.version>
                 <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
                 <sonar.organization>arquimedesjr</sonar.organization>
                 <sonar.login>74b15cac50df27196b9abc6d4cc9b22f632cc01f</sonar.login>
