@@ -6,8 +6,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-public class DataUtilsTest {
-
+public class DataUtilsTests {
     @Test
     public void deveRetornarTrue(){
         LocalDate date = LocalDate.of(2030,01,01);
