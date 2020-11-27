@@ -17,22 +17,18 @@
     <description>A very simple task management tool</description>
 
 
-    <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
-                <sonar.organization>arquimedesjr</sonar.organization>
-                <sonar.login>74b15cac50df27196b9abc6d4cc9b22f632cc01f</sonar.login>
-                <sonar.projectKey>tasks-backend</sonar.projectKey>
-                <sonar.organization>arquimedesjr</sonar.organization>
-                <sonar.language>java</sonar.language>
-            </properties>
-        </profile>
-    </profiles>
+    <properties>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
+        <sonar.projectKey>tasks-backend</sonar.projectKey>
+        <sonar.organization>arquimedesjr</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.java.test.binaries>${project.basedir}/target</sonar.java.test.binaries>
+        <sonar.coverage.exclusions>**/.mvn/**,**/src/test/**,**/model/**,**Aplication.java</sonar.coverage.exclusions>
+        <sonar.login>74b15cac50df27196b9abc6d4cc9b22f632cc01f</sonar.login>
+    </properties>
 
 
     <dependencies>
@@ -77,40 +73,23 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.7.201606060606</version>
+                <version>0.8.3</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <limits>
-                                        <limit>
-                                            <minimum>0.9</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
                 </executions>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
