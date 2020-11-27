@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 
-public class TaskControllerTests {
+public class TaskControllerTest {
 
     @Mock
     private TaskRepo taskRepo;
