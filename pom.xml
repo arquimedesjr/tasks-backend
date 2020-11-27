@@ -23,12 +23,12 @@
         <sonar.organization>arquimedesjr</sonar.organization>
         <sonar.login>74b15cac50df27196b9abc6d4cc9b22f632cc01f</sonar.login>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.java.test.binaries>${project.basedir}/target</sonar.java.test.binaries>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <aggregate.report.dir>../jacoco-report/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/${aggregate.report.dir}
+        </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.language>java</sonar.language>
-        <sonar.coverage.exclusions>**/.mvn/**,**/src/test/**,**/model/**,**Aplication.java</sonar.coverage.exclusions>
 
     </properties>
 
@@ -75,23 +75,18 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.3</version>
+                <version>0.8.5</version>
                 <executions>
                     <execution>
+                        <id>report</id>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>report-aggregate</goal>
                         </goals>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <destFile>${sonar.coverage.jacoco.xmlReportPaths}</destFile>
-                </configuration>
             </plugin>
         </plugins>
     </build>
