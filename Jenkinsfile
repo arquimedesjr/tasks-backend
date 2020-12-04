@@ -12,5 +12,15 @@ pipeline {
                 bat 'mvn test'
             }
         }
+        stage('Sonar Analysis') {
+            enviroment{
+                scannerHome = tool 'SONAR_SCANNER'
+            }
+            steps {
+                withSonarQubeEnv('SONAR_SERVER'){
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=tasks-backend -Dsonar.organization=arquimedesjr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=74b15cac50df27196b9abc6d4cc9b22f632cc01f -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
+                }
+            }
+        }
     }
 }
