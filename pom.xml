@@ -77,14 +77,44 @@
                 <version>0.8.3</version>
                 <executions>
                     <execution>
+                        <id>agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
                 </executions>
                 <configuration>
-                    <append>true</append>
+                    <rules>
+                        <rule>
+                            <element>
+                                PACKAGE
+                            </element>
+                            <limits>
+                                <limit>
+                                    <couter>LINE</couter>
+                                    <value>COVEREDRATIO</value>
+                                    <minimun>0</minimun>
+                                </limit>
+                            </limits>//
+                        </rule>
+                    </rules>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
+                    <append>true</append>
                 </configuration>
             </plugin>
 
