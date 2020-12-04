@@ -24,17 +24,9 @@ pipeline {
         }
         stage ('Quality Gate'){
             steps {
-                maxRetry = 200
-                forloop (i=0; i<maxRetry; i++){
-                    try {
-                        timeout(time: 10, unit: 'SECONDS') {
-                            waitForQualityGate abortPipeline: true
-                        }
-                    } catch(Exception e) {
-                        if (i == maxRetry-1) {
-                            throw e
-                        }
-                    }
+                sleep(30)
+                timeout(time: 15, unit: 'MINUTES'){
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
